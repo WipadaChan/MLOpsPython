@@ -11,4 +11,17 @@
         "min_hessian": 1,
         "verbose": 0
     }
+    ,
+    "evaluation":
+    {
+
+    },
+    "registration":
+    {
+        "tags": ["auc"]
+    },
+    "scoring":
+    {
+        
+    }
 }
