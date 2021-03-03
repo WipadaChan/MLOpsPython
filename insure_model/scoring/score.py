@@ -33,7 +33,7 @@ def init():
     global LGBM_MODEL
     # Load the model from file into a global object
     model_path = Model.get_model_path(
-        model_name="porto_seguro_safe_driver_model")
+        model_name="insure_model_model.pkl")
     LGBM_MODEL = joblib.load(model_path)
 
 

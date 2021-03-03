@@ -97,7 +97,7 @@ def main():
     # Load the training data as dataframe
     data_dir = "data"
     data_file = os.path.join(
-        data_dir, 'porto_seguro_safe_driver_prediction_input.csv.csv')
+        data_dir, 'porto_seguro_safe_driver_prediction_input.csv')
     train_df = pd.read_csv(data_file)
 
     data = split_data(train_df)
