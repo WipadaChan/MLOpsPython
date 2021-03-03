@@ -5,14 +5,18 @@ import joblib
 import json
 import os
 import pandas as pd
-import shutil
+
 
 # Import functions from train.py
 from train import split_data, train_model, get_model_metrics
 
 # Get the output folder for the model from the '--output_folder' parameter
 parser = argparse.ArgumentParser()
-parser.add_argument('--output_folder', type=str, dest='output_folder', default="outputs")
+parser.add_argument(
+    '--output_folder',
+    type=str,
+    dest='output_folder',
+    default="outputs")
 args = parser.parse_args()
 output_folder = args.output_folder
 
@@ -30,13 +34,11 @@ with open("parameters.json") as f:
 # Log each of the parameters to the run
 for param_name, param_value in parameters.items():
     run.parent.log(param_name, param_value)
-    
-# Use the functions imported from train.py to prepare data, train the model, and calculate the metrics
-## TODO
-data = split_data(train_df)
-model = train_model(data,parameters)
 
-# Log AUC Value 
+data = split_data(train_df)
+model = train_model(data, parameters)
+
+# Log AUC Value
 model_metrics = get_model_metrics(model, data)
 for param_name, param_value in model_metrics.items():
     run.parent.log(param_name, param_value)

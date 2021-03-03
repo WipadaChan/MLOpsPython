@@ -1,9 +1,6 @@
 import numpy as np
 import pandas as pd
 import lightgbm
-from sklearn.model_selection import train_test_split
-import joblib
-from sklearn import metrics
 
 # functions to test are imported from train.py
 from train import split_data, train_model, get_model_metrics
@@ -17,7 +14,7 @@ def test_split_data():
         'target': [0, 0, 1, 0, 1],
         'col1': [1, 2, 3, 4, 5],
         'col2': [2, 1, 1, 2, 1]
-        }
+    }
 
     data_df = pd.DataFrame(data=test_data)
     data = split_data(data_df)
@@ -61,7 +58,7 @@ def test_get_model_metrics():
             return np.array([0, 0])
 
     data = __get_test_datasets()
-    
+
     metrics = get_model_metrics(MockModel(), data)
 
     # verify that metrics is a dictionary containing the auc value.
@@ -81,5 +78,3 @@ def __get_test_datasets():
     valid_data = lightgbm.Dataset(X_test, y_test)
     data = (train_data, valid_data)
     return data
-
-
