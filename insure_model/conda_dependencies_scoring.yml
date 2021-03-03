@@ -26,7 +26,8 @@ dependencies:
   - pip:
       # Base AzureML SDK
       - azureml-sdk==1.6.*
-      
+      - lightgbm 
+      - azureml-dataprep
       # Scoring deps
       - scikit-learn
       - pandas

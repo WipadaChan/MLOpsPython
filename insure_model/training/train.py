@@ -76,7 +76,7 @@ def main():
     """This method invokes the training functions for development purposes"""
     
     # Read data from a file
-    data_df = pd.read_csv('porto_seguro_safe_driver_prediction_input.csv')
+    data_df = pd.read_csv('data/porto_seguro_safe_driver_prediction_input.csv')
 
     # Hard code the parameters for training the model
     parameters = {
@@ -98,6 +98,6 @@ def main():
     # Print the resulting metrics for the model
     ## TODO
     print(get_model_metrics(model, data))
-    
+
 if __name__ == '__main__':
     main()
