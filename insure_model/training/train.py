@@ -29,6 +29,7 @@ import pandas as pd
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import lightgbm
+import os
 
 
 def split_data(data_df):
@@ -78,7 +79,7 @@ def main():
     """This method invokes the training functions for development purposes"""
 
     # Read data from a file
-    data_df = pd.read_csv('porto_seguro_safe_driver_prediction_input.csv')
+    print("Running train.py")
 
     # Hard code the parameters for training the model
     parameters = {
@@ -93,11 +94,21 @@ def main():
         'verbose': 2
     }
 
-    # Call the functions defined in this file
-    data = split_data(data_df)
+    # Load the training data as dataframe
+    data_dir = "data"
+    data_file = os.path.join(
+        data_dir, 'porto_seguro_safe_driver_prediction_input.csv.csv')
+    train_df = pd.read_csv(data_file)
+
+    data = split_data(train_df)
+
+    # Train the model
     model = train_model(data, parameters)
-    # Print the resulting metrics for the model
-    print(get_model_metrics(model, data))
+
+    # Log the metrics for the model
+    metrics = get_model_metrics(model, data)
+    for (k, v) in metrics.items():
+        print(f"{k}: {v}")
 
 
 if __name__ == '__main__':

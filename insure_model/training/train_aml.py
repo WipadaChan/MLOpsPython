@@ -6,7 +6,10 @@ import json
 import os
 
 # Import functions from train.py
-from train import split_data, train_model, get_model_metrics
+# functions to test are imported from train.py
+from insure_model.training.train import split_data
+from insure_model.training.train import train_model
+from insure_model.training.train import get_model_metrics
 from azureml.core import Dataset, Datastore, Workspace
 
 

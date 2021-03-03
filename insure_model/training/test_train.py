@@ -3,7 +3,9 @@ import pandas as pd
 import lightgbm
 
 # functions to test are imported from train.py
-from train import split_data, train_model, get_model_metrics
+from insure_model.training.train import split_data
+from insure_model.training.train import train_model
+from insure_model.training.train import get_model_metrics
 
 """A set of simple unit tests for protecting against regressions in train.py"""
 
