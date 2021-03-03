@@ -35,8 +35,10 @@ def split_data(data_df):
     """Split a dataframe into training and validation datasets"""
     features = data_df.drop(['target', 'id'], axis=1)
     labels = np.array(data_df['target'])
-    features_train, features_valid, labels_train, labels_valid = train_test_split(
-        features, labels, test_size=0.2, random_state=0)
+    features_train, features_valid = train_test_split(
+        features, test_size=0.2, random_state=0)
+    labels_train, labels_valid = train_test_split(
+        labels, test_size=0.2, random_state=0)
     train_data = lightgbm.Dataset(features_train, label=labels_train)
     valid_data = lightgbm.Dataset(
         features_valid,
