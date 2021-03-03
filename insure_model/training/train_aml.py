@@ -1,16 +1,35 @@
-# Import libraries
+"""
+Copyright (C) Microsoft Corporation. All rights reserved.​
+ ​
+Microsoft Corporation (“Microsoft”) grants you a nonexclusive, perpetual,
+royalty-free right to use, copy, and modify the software code provided by us
+("Software Code"). You may not sublicense the Software Code or any use of it
+(except to your affiliates and to vendors to perform work on your behalf)
+through distribution, network access, service agreement, lease, rental, or
+otherwise. This license does not purport to express any claim of ownership over
+data you may have shared with Microsoft in the creation of the Software Code.
+Unless applicable law gives you more rights, Microsoft reserves all other
+rights not expressly granted herein, whether by implication, estoppel or
+otherwise. ​
+ ​
+THE SOFTWARE CODE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+MICROSOFT OR ITS LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THE SOFTWARE CODE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+"""
+from azureml.core.run import Run
+from azureml.core import Dataset, Datastore, Workspace
+import os
 import argparse
-from azureml.core import Run
 import joblib
 import json
-import os
-
-# Import functions from train.py
-# functions to test are imported from train.py
-from insure_model.training.train import split_data
-from insure_model.training.train import train_model
-from insure_model.training.train import get_model_metrics
-from azureml.core import Dataset, Datastore, Workspace
+from train import split_data, train_model, get_model_metrics
 
 
 def register_dataset(
@@ -36,7 +55,7 @@ def main():
         "--model_name",
         type=str,
         help="Name of the Model",
-        default="porto_seguro_safe_driver_model.pkl",
+        default="diabetes_model.pkl",
     )
 
     parser.add_argument(
@@ -132,7 +151,7 @@ def main():
     model = train_model(data, train_args)
 
     # Evaluate and log the metrics returned from the train function
-    metrics = get_model_metrics(model, data)
+    metrics = get_model_metrics(model, data[1])
     for (k, v) in metrics.items():
         run.log(k, v)
         run.parent.log(k, v)
