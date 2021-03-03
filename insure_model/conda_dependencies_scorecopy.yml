@@ -26,6 +26,7 @@ dependencies:
   - pip:
       # Base AzureML SDK
       - azureml-sdk==1.6.*
-      
+      - azureml-dataprep
+      - lightgbm 
       # Score copying deps
       - azure-storage-blob
