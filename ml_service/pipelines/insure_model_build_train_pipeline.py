@@ -32,7 +32,7 @@ def main():
         aml_workspace,
         e.aml_env_name,
         conda_dependencies_file=e.aml_env_train_conda_dep_file,
-        create_new=True,
+        create_new=e.rebuild_env,
     )  #
     run_config = RunConfiguration()
     run_config.environment = environment
@@ -65,7 +65,7 @@ def main():
         create_sample_data_csv()
 
         # Use a CSV to read in the data set.
-        file_name = "insure_model.csv"
+        file_name = "diabetes.csv"
 
         if not os.path.exists(file_name):
             raise Exception(
@@ -91,7 +91,7 @@ def main():
         dataset = dataset.register(
             workspace=aml_workspace,
             name=dataset_name,
-            description="insure_model training data",
+            description="diabetes training data",
             tags={"format": "CSV"},
             create_new_version=True,
         )
